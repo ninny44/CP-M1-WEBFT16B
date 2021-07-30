@@ -39,7 +39,19 @@ const {
 
 var isAncestor = function(genealogyTree, ancestor, descendant){
   // Tu código aca:
-
+ if(genealogyTree[ancestor].length <= 0){
+   return false
+ }
+for (let i = 0; i < genealogyTree[ancestor].length; i++){
+  let aux = genealogyTree[ancestor][i];
+  if(aux === descendant){
+    return true;
+  }
+  if (genealogyTree[aux].length > 0){
+    return isAncestor(genealogyTree, aux, descendant)
+  }
+ }
+ return false
 }
 
 
@@ -217,37 +229,37 @@ BinarySearchTree.prototype.height = function(){
 // Ejercicio 8
 // Dado un arreglo ordenado, encontrar el índice de un elemento específico pasado como parámetro
 // utilizando el método conocido como búsqueda binaria. En el caso de que el número buscado no se encuentre
-// en el array devolver -1.
+// en el genealogyTree devolver -1.
 // Para mayor información sobre dicho método:
 //    - https://www.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search
 //    - https://en.wikipedia.org/wiki/Binary_search_algorithm
 // Ejemplo:
-//    array = [1,2,3,4,5,6,7,8,9,10];
-//    binarySearch(array, 2) --> Devolvería 1 ya que array[1] = 2
-//    [Donde 2 sería el número sobre el cuál queremos saber su posición en el array]
+//    genealogyTree = [1,2,3,4,5,6,7,8,9,10];
+//    binarySearch(genealogyTree, 2) --> Devolvería 1 ya que genealogyTree[1] = 2
+//    [Donde 2 sería el número sobre el cuál queremos saber su posición en el genealogyTree]
 
 
-var binarySearch = function (array, target) {
+var binarySearch = function (genealogyTree, target) {
   // Tu código aca:
 
 }
 
 // EJERCICIO 9
 // Ordená un arreglo de objetos usando un bubble sort pero con algunas particularidades.
-// Además del arreglo a ordenar (array) la función va a recibir como parámetro una función
+// Además del arreglo a ordenar (genealogyTree) la función va a recibir como parámetro una función
 // que va a ser quien va a determinar si un elemento es "mayor" al otro para determinar su
 // posición final
 // Ejemplo:
-// var array = [
+// var genealogyTree = [
 //   {name: 'Franco', age: 26, height: 1.85},
 //   {name: 'Toni', age: 30, height: 1.75},
 //   {name: 'Mati', age: 25, height: 1.77},
 //   {name: 'Leo', age: 40, height: 1.83}
 // ]
 //
-// orderFunction(array[0], array[1]) --> Devolvera 1 si están bien ordenados o -1 si hay que intercambiarlos
+// orderFunction(genealogyTree[0], genealogyTree[1]) --> Devolvera 1 si están bien ordenados o -1 si hay que intercambiarlos
 // Suponiendo que la orderFunction devuelve -1 si la edad del segundo elemento es menor que la del primero
-// specialSort(array, orderFunction) --> Retornaría el siguiente array:
+// specialSort(genealogyTree, orderFunction) --> Retornaría el siguiente genealogyTree:
 // [
 //   {name: 'Mati', age: 25, height: 1.77},
 //   {name: 'Franco', age: 26, height: 1.85},
@@ -255,7 +267,7 @@ var binarySearch = function (array, target) {
 //   {name: 'Leo', age: 40, height: 1.83}
 // ]
 
-var specialSort = function(array, orderFunction) {
+var specialSort = function(genealogyTree, orderFunction) {
   // Tu código aca:
 
 }
@@ -264,7 +276,7 @@ var specialSort = function(array, orderFunction) {
 
 // EJERCICIO 10
 // Implementar la función closureDetect que recibe como parámetro:
-//  - Un array (symptoms) que va a contener en cada posición un string representando un
+//  - Un genealogyTree (symptoms) que va a contener en cada posición un string representando un
 //    síntoma médico de alguna enfermedad
 //  - Un número (min) que va a indicar la cantidad mínima de síntomas que debe tener un
 //    paciente para considerar que posee la enfermedad
