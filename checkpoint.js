@@ -40,7 +40,7 @@ const {
 var isAncestor = function(genealogyTree, ancestor, descendant){
   // Tu código aca:
  if(genealogyTree[ancestor].length <= 0){
-   return false
+   return false;
  }
 for (let i = 0; i < genealogyTree[ancestor].length; i++){
   let aux = genealogyTree[ancestor][i];
@@ -48,10 +48,10 @@ for (let i = 0; i < genealogyTree[ancestor].length; i++){
     return true;
   }
   if (genealogyTree[aux].length > 0){
-    return isAncestor(genealogyTree, aux, descendant)
+    return isAncestor(genealogyTree, aux, descendant);
   }
  }
- return false
+ return false;
 }
 
 
@@ -89,7 +89,19 @@ for (let i = 0; i < genealogyTree[ancestor].length; i++){
 
 function secuenciaHenry(obj, n) {
   // Tu código aca:
-
+var henryCero = 0;
+var henryUno = 0;
+for (const property in obj){
+  if (!isNaN(property)) {henryCero ++
+  };
+  if (Array.isArray(obj[property])){
+    henryUno += obj[property].length;
+  }
+  }
+  if (n === 0) return henryCero;
+  if (n === 1) return henryUno;
+  if (n < 0) return null;
+  return secuenciaHenry(obj, n-1) * secuenciaHenry(obj, n-2) - secuenciaHenry(obj, n-2);
 }
 
 // ---------------------
