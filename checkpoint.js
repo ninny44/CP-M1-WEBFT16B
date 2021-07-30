@@ -89,13 +89,10 @@ for (let i = 0; i < genealogyTree[ancestor].length; i++){
 
 function secuenciaHenry(obj, n) {
   // Tu código aca:
-
-  if(n == 0) return obj.first
-  if(n == 1) return Object.keys(obj.length);
-  if(n < 0) return null;
-  
-return secuenciaHenry(obj,n-1) * secuenciaHenry(obj,n-2) - secuenciaHenry(obj, n-2);
-
+  if (n < 0) return null;
+  if (n === 0) return obj.first;
+  if (n === 1) return Object.keys(obj).length;
+  return (secuenciaHenry(obj, n - 1) * secuenciaHenry(obj, n - 2) - secuenciaHenry(obj, n - 2));
 }
 
 // ---------------------
@@ -116,7 +113,17 @@ return secuenciaHenry(obj,n-1) * secuenciaHenry(obj,n-2) - secuenciaHenry(obj, n
 
 LinkedList.prototype.size = function(){
   // Tu código aca:
-
+  let count = 0;
+  if(this.head === null){
+    return 0
+  }else{
+    var actual = this.head;
+    while (actual.next){
+      count += 1;
+      actual = actual.next;
+    }
+    return (count +1);
+  }
 }
 
 
@@ -137,7 +144,23 @@ LinkedList.prototype.size = function(){
 
 LinkedList.prototype.switchPos = function(pos1, pos2){
   // Tu código aca:
-
+  let actual1 = this.head
+  let actual2 = this.head;
+  if (pos1 > this.size() || pos2 > this.size() || pos1 < 0 || pos2 < 0) return false;
+  else if (this.head === null) return false;
+  else{
+    for (let i = 0; i < pos1.length; i++) {
+      actual1 = actual.next;
+    }
+    let auxValor1 = actual1.value;
+    for (let i = 0; i < pos2.length; i++) {
+        actual1 = actual1.next;
+    }
+    let auxValor2 = actual2.value;
+    actual.value = auxValor2;
+    actual2.value = auxValor1;
+    return true;
+  }
 }
 
 // EJERCICIO 5
@@ -153,8 +176,20 @@ LinkedList.prototype.switchPos = function(pos1, pos2){
 // Continuando con el nodo 2 de la lista 2, conectandose con el nodo 2 de la lista 2.
 var mergeLinkedLists = function(linkedListOne, linkedListTwo){
   // Tu código aca:
+  var list = new LinkedList();
+  var actual1 = linkedListOne.head
+  var actual2 = linkedListTwo.head
 
+  while(actual1 != null && actual2 != null){
+    list.add(actual1.value)
+    list.add(actual2.value)
+
+    actual1 = actual1.next
+    actual2 = actual2.next
+  }
+return list
 }
+
 
 
 // ----------------------
@@ -225,7 +260,26 @@ var cardGame = function(playerOneCards, playerTwoCards){
 
 BinarySearchTree.prototype.height = function(){
   // Tu código aca:
+  if (!this.value) {
+    return 0;
+  }
 
+  if (this.left === null && this.right === null) {
+    return 1;
+  }
+
+  if (this.left === null) {
+    return 1 + this.right.height();
+  }
+
+  if (this.right === null) {
+    return 1 + this.left.height();
+  }
+
+  var izq = this.left.height()
+  var der = this.right.height()
+
+  return 1 + Math.max(izq, der)
 }
 
 
@@ -247,7 +301,25 @@ BinarySearchTree.prototype.height = function(){
 
 var binarySearch = function (genealogyTree, target) {
   // Tu código aca:
-
+  let primero = 0;
+  let ultimo = genealogyTree.length -1;
+  let posicion = -1;
+  let resultado = false;
+  let medio;
+ 
+  while (resultado === false && primero <= ultimo) {
+    medio = Math.floor((primero + ultimo) / 2);
+    if (genealogyTree[medio] == target) {
+      resultado = true;
+      posicion = medio;
+    } else if (genealogyTree[medio] > target) {
+      ultimo = medio - 1;
+    } else {
+      primero = medio + 1;
+    }
+  }
+  return posicion;
+  
 }
 
 // EJERCICIO 9
@@ -275,7 +347,20 @@ var binarySearch = function (genealogyTree, target) {
 
 var specialSort = function(genealogyTree, orderFunction) {
   // Tu código aca:
+  let cambio = true;
 
+  while (cambio) {
+    cambio = false;
+    for (let i = 0; i < genealogyTree.length - 1; i++) {
+      if (orderFunction(genealogyTree[i], genealogyTree[i + 1]) === -1) {
+        let res = genealogyTree[i];
+        genealogyTree[i] = genealogyTree[i + 1];
+        genealogyTree[i + 1] = res;
+        cambio = true;
+      }
+    }
+  }
+  return genealogyTree;
 }
 
 // ----- Closures -----
