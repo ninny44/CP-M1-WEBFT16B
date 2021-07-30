@@ -89,19 +89,13 @@ for (let i = 0; i < genealogyTree[ancestor].length; i++){
 
 function secuenciaHenry(obj, n) {
   // Tu código aca:
-var henryCero = 0;
-var henryUno = 0;
-for (const property in obj){
-  if (!isNaN(property)) {henryCero ++
-  };
-  if (Array.isArray(obj[property])){
-    henryUno += obj[property].length;
-  }
-  }
-  if (n === 0) return henryCero;
-  if (n === 1) return henryUno;
-  if (n < 0) return null;
-  return secuenciaHenry(obj, n-1) * secuenciaHenry(obj, n-2) - secuenciaHenry(obj, n-2);
+
+  if(n == 0) return obj.first
+  if(n == 1) return Object.keys(obj.length);
+  if(n < 0) return null;
+  
+return secuenciaHenry(obj,n-1) * secuenciaHenry(obj,n-2) - secuenciaHenry(obj, n-2);
+
 }
 
 // ---------------------
@@ -314,8 +308,18 @@ var specialSort = function(genealogyTree, orderFunction) {
 
 function closureDetect(symptoms, min) {
   // Tu código aca:
-
+  return function(persona){
+    var sintoma = 0;
+    for (var i = 0; i < symptoms.length; i++) {
+      if(symptoms.includes(persona.symptoms[i])){
+        sintoma ++;
+      } 
+    }
+  if (sintoma >= min) return true;
+  return false
+  }
 }
+
 
 // -------------------
 
