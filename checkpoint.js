@@ -100,7 +100,7 @@ function secuenciaHenry(obj, n) {
 // ----- LinkedList -----
 
 // EJERCICIO 3
-// Implementar el método size dentro del prototype de LinkedList que deberá retornar el tamaño actual de
+// Implementar el método size dentro del prototype de LinkedList que deberá retornar el tamaño actual1 de
 // la LinkedList. En el caso de que la lista se encuentre vacía deberá retornar cero.
 // Ejemplo:
 //    var lista = new LinkedList();
@@ -117,10 +117,10 @@ LinkedList.prototype.size = function(){
   if(this.head === null){
     return 0
   }else{
-    var actual = this.head;
-    while (actual.next){
+    var actual1 = this.head;
+    while (actual1.next){
       count += 1;
-      actual = actual.next;
+      actual1 = actual1.next;
     }
     return (count +1);
   }
@@ -130,12 +130,12 @@ LinkedList.prototype.size = function(){
 // EJERCICIO 4
 // Implementar el método switchPos dentro del prototype de LinkedList que deberá intercambiar
 // el elemento que se encuentre en pos1 con el elemento en pos2
-// En el caso de que alguna de las dos posiciones no sea válida (Supere el tamaño de la lista actual 
+// En el caso de que alguna de las dos posiciones no sea válida (Supere el tamaño de la lista actual1 
 // o sea un número negativo) debe devolver false.
 // Si los nodos fueron removidos correctamente devolver true.
 // Aclaración: la posición cero corresponde al head de la LinkedList
 // Ejemplo 1:
-//    Suponiendo que la lista actual es: Head --> [1] --> [2] --> [3] --> [4] --> [5]
+//    Suponiendo que la lista actual1 es: Head --> [1] --> [2] --> [3] --> [4] --> [5]
 //    lista.switchPos(1,3);
 //    Ahora la lista quedaría: Head --> [1] --> [4] --> [3] --> [2] --> [5]
 //    y la función debería haber devuelto true
@@ -144,20 +144,20 @@ LinkedList.prototype.size = function(){
 
 LinkedList.prototype.switchPos = function(pos1, pos2){
   // Tu código aca:
-  let actual1 = this.head
+  let actual1 = this.head;
   let actual2 = this.head;
   if (pos1 > this.size() || pos2 > this.size() || pos1 < 0 || pos2 < 0) return false;
   else if (this.head === null) return false;
-  else{
-    for (let i = 0; i < pos1.length; i++) {
-      actual1 = actual.next;
+  else {
+    for (let index = 0; index < pos1; index++) {
+      actual1 = actual1.next;
     }
     let auxValor1 = actual1.value;
-    for (let i = 0; i < pos2.length; i++) {
-        actual1 = actual1.next;
+    for (let index = 0; index < pos2; index++) {
+      actual2 = actual2.next;
     }
     let auxValor2 = actual2.value;
-    actual.value = auxValor2;
+    actual1.value = auxValor2;
     actual2.value = auxValor1;
     return true;
   }
@@ -177,14 +177,14 @@ LinkedList.prototype.switchPos = function(pos1, pos2){
 var mergeLinkedLists = function(linkedListOne, linkedListTwo){
   // Tu código aca:
   var list = new LinkedList();
-  var actual1 = linkedListOne.head
+  var actual11 = linkedListOne.head
   var actual2 = linkedListTwo.head
 
-  while(actual1 != null && actual2 != null){
-    list.add(actual1.value)
+  while(actual11 != null && actual2 != null){
+    list.add(actual11.value)
     list.add(actual2.value)
 
-    actual1 = actual1.next
+    actual11 = actual11.next
     actual2 = actual2.next
   }
 return list
